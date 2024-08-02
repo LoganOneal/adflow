@@ -1,5 +1,11 @@
 import Link from 'next/link';
 import classNames from 'classnames';
+import {
+  Home,
+  LineChart, Package, ShoppingCart,
+  Users
+} from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 export interface MenuItem {
   name: string;
@@ -24,6 +30,14 @@ interface NavigationItemProps {
 }
 
 const NavigationItems = ({ menus }: NavigationItemsProps) => {
+  return ( 
+    <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
+      {menus.map((menu, indx) => (
+          <NavigationItem key={indx} menu={menu} />
+         
+      ))}
+  </nav>
+  )
   return (
     <ul role="list" className="flex flex-1 flex-col gap-1">
       {menus.map((menu) => (
@@ -45,6 +59,17 @@ const NavigationItems = ({ menus }: NavigationItemsProps) => {
 };
 
 const NavigationItem = ({ menu, className }: NavigationItemProps) => {
+  return (
+    <Link
+      href={menu.href}
+      className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${
+        menu.active ? 'text-primary' : 'text-muted-foreground'
+      }${className}`}
+    >
+      <Home className="h-4 w-4" />
+      {menu.name}
+    </Link>
+  )
   return (
     <Link
       href={menu.href}
